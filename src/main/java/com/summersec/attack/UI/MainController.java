@@ -263,7 +263,7 @@ public class MainController {
         this.echoOpt.setItems(echoes);
         this.shellPassText.setText("pass1024");
         this.shellPathText.setText("/favicondemo.ico");
-        final ObservableList<String> memShells = FXCollections.observableArrayList(new String[]{"哥斯拉[Filter]", "蚁剑[Filter]", "冰蝎[Filter]", "NeoreGeorg[Filter]", "reGeorg[Filter]", "哥斯拉[Servlet]", "蚁剑[Servlet]", "冰蝎[Servlet]", "NeoreGeorg[Servlet]", "reGeorg[Servlet]", "ChangeShiroKey[Filter]", "ChangeShiroKey[Filter2]", "BastionFilter", "BastionEncryFilter", "AddDllFilter"});
+        final ObservableList<String> memShells = FXCollections.observableArrayList(new String[]{"哥斯拉[Filter]", "蚁剑[Filter]", "冰蝎[Filter]", "NeoreGeorg[Filter]", "reGeorg[Filter]", "哥斯拉[Servlet]", "蚁剑[Servlet]", "冰蝎[Servlet]", "NeoreGeorg[Servlet]", "reGeorg[Servlet]", "哥斯拉[Valve]", "冰蝎[Valve]", "ChangeShiroKey[Filter]", "ChangeShiroKey[Filter2]", "BastionFilter", "BastionEncryFilter", "AddDllFilter"});
 //        final ObservableList<String> memShells = FXCollections.observableArrayList(new String[]{"哥斯拉[Servlet]", "冰蝎[Servlet]", "蚁剑[Servlet]", "NeoreGeorg[Servlet]", "reGeorg[Servlet]"});
         this.memShellOpt.setPromptText("冰蝎[Filter]");
         this.memShellOpt.setValue("冰蝎[Filter]");
@@ -275,6 +275,11 @@ public class MainController {
                     MainController.this.shellPassText.setDisable(true);
                 } else {
                     MainController.this.shellPassText.setDisable(false);
+                }
+                if (((String)memShells.get(number2.intValue())).contains("哥斯拉[Valve]") || ((String)memShells.get(number2.intValue())).contains("冰蝎[Valve]")) {
+                    MainController.this.shellPathText.setDisable(true);
+                } else {
+                    MainController.this.shellPathText.setDisable(false);
                 }
                 if (((String)memShells.get(number2.intValue())).contains("ChangeShiroKey")){
 //                    MainController.this.

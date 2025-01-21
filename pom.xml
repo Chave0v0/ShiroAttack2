@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>shiro_attack</artifactId>
-    <version>4.5.6-SNAPSHOT</version>
+    <version>4.7.1-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
@@ -66,9 +66,9 @@
                     <source>8</source>
                     <target>8</target>
                     <encoding>UTF-8</encoding>
-                    <compilerArguments>
-                        <bootclasspath>D:/java/jre/lib/rt.jar;D:/java/jre/lib/jce.jar</bootclasspath>
-                    </compilerArguments>
+<!--                    <compilerArguments>-->
+<!--                        <bootclasspath>D:/java/jre/lib/rt.jar;D:/java/jre/lib/jce.jar</bootclasspath>-->
+<!--                    </compilerArguments>-->
                 </configuration>
             </plugin>
             <plugin>
@@ -300,11 +300,13 @@
             <artifactId>hutool-all</artifactId>
             <version>5.7.13</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
         <dependency>
-            <groupId>javassist</groupId>
+            <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.12.0.GA</version>
+            <version>3.28.0-GA</version>
         </dependency>
+
 
     </dependencies>
 
